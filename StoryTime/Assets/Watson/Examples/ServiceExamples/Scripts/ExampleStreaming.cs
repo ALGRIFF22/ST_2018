@@ -230,8 +230,8 @@ public class ExampleStreaming : MonoBehaviour
 				if (i.Trim().ToLower() == c)
 				{
 					//send i to audio manager
-					SendKeyword(i.Trim().ToLower());
-					Debug.Log("sent " + i + " to audio manager|| " + i + c);
+					SendKeyword(c);
+					Debug.Log("sent " + i + " to audio manager|| " + i + "" + c);
 				}
 				else yield return null;
 			}

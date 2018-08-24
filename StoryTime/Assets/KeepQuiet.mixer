@@ -5,7 +5,7 @@ AudioMixerController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AmbientSoundMixer
+  m_Name: KeepQuiet
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
@@ -60,5 +60,5 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 3b884d4951ffca142a6ae265bc5113fd
   m_FloatValues:
-    85c0aa4f9109cb9428bd419f2e39716b: 0
+    85c0aa4f9109cb9428bd419f2e39716b: -80
   m_TransitionOverrides: {}

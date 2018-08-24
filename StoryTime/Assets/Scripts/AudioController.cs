@@ -10,6 +10,8 @@ public class AudioController : MonoBehaviour {
 
 	int activePage;
 
+	public string word;
+
 	private void OnEnable()
 	{
 		BookSelect.SendBookEvent += SendBookEvent;
@@ -41,15 +43,24 @@ public class AudioController : MonoBehaviour {
 
 	void PlayActionSound(string keyword)
 	{
+		word = keyword;
+		Debug.Log("recieved keyword " + keyword);
 		for(int i = 0; i < ActionSounds.Count; i++)
 		{
+			Debug.Log("checking for audio to play " + ActionSounds[i].name + "" + keyword);
 			if (ActionSounds[i].name == keyword)
 			{
+				Debug.Log("audio and keyword match");
 				AudioSource a = ActionSounds[i].GetComponent<AudioSource>();
 				a.volume = 1;
-				a.Play();
+				if (!a.isPlaying)
+				{ 
+					a.Play();
+					Debug.Log("audio playing");
+				}
+				
 			}
-			else return;
+			
 		}
 	}
 

@@ -8,6 +8,7 @@ public class BookSelect : MonoBehaviour {
 	public GameObject pageTurner;
 	public GameObject booksParent;
 	public GameObject streamingAsset;
+	public GameObject audioVisualiser;
 
 	public List<GameObject> Books;
 
@@ -28,6 +29,8 @@ public class BookSelect : MonoBehaviour {
 		pageTurner.SetActive(true);
 		//turns voice recognition on
 		streamingAsset.SetActive(true);
+		//turns audio visualiser on
+		audioVisualiser.SetActive(true);
 
 		//gets correct book and sets it active
 		//sends the book to the pageturner controller
