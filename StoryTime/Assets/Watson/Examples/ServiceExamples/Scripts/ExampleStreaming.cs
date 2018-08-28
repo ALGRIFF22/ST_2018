@@ -61,6 +61,13 @@ public class ExampleStreaming : MonoBehaviour
     private int _recordingHZ = 22050;
 
     private SpeechToText _service;
+	public List<GameObject> AmbientSounds;
+	public List<GameObject> ActionSounds;
+
+	int activePage;
+
+	public string word;
+	bool canCheckWords;
 
 	public delegate void KeywordToAudioController(string keyword);
 	public static event KeywordToAudioController SendKeyword;
@@ -218,29 +225,25 @@ public class ExampleStreaming : MonoBehaviour
 
         yield break;
     }
-	IEnumerator WordCheck(string text)
+	IEnumerator WordCheck()
 	{
-
-		spokenWords = text.Split(' ');
-		
-		foreach(string i in spokenWords)
+		for (int i = 0; i < spokenWords.Length; i++)
 		{
-			foreach(string c in keyWords)
+			for(int c = 0; c< keyWords.Length;c++)
 			{
-				if (i.Trim().ToLower() == c)
+				if (spokenWords[i].Trim().ToLower() == keyWords[c])
 				{
-					//send i to audio manager
-					SendKeyword(c);
+					//send c to audio manager
+					SendKeyword(keyWords[c]);
 					Debug.Log("sent " + i + " to audio manager|| " + i + "" + c);
 				}
-				else yield return null;
+				
 			}
-			yield return null;
 		}
 		yield return null;
 	}
-
-    private void OnRecognize(SpeechRecognitionEvent result, Dictionary<string, object> customData)
+	
+	private void OnRecognize(SpeechRecognitionEvent result, Dictionary<string, object> customData)
     {
 
 		if (result != null && result.results.Length > 0)
@@ -251,10 +254,13 @@ public class ExampleStreaming : MonoBehaviour
                 {
                     string text = string.Format(alt.transcript, res.final);
                     Log.Debug("ExampleStreaming.OnRecognize()", text);
-                    //ResultsField.text = text;
+					//ResultsField.text = text;
 
-					StartCoroutine(WordCheck(text));
-                }
+					spokenWords = text.Split(' ');
+					StartCoroutine(WordCheck());
+					
+
+				}
 
                 if (res.keywords_result != null && res.keywords_result.keyword != null)
                 {
